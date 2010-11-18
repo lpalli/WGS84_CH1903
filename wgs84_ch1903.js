@@ -72,8 +72,8 @@ function CHtoWGSlng(y, x) {
 function SEXtoDEC(angle) {
     var deg, min, sec;
     // Extract DMS
-    deg = parseInt(angle);
-    min = parseInt((angle - deg) * 100);
+    deg = parseInt(angle, 10);
+    min = parseInt((angle - deg) * 100, 10);
     sec = (((angle - deg) * 100) - min) * 100;
     
     // Result in degrees sex (dd.mmss)
@@ -84,8 +84,8 @@ function SEXtoDEC(angle) {
 function DECtoSEX(angle) {
     var deg, min, sec;
     // Extract DMS
-    deg = parseInt(angle);
-    min = parseInt((angle - deg) * 60);
+    deg = parseInt(angle, 10);
+    min = parseInt((angle - deg) * 60, 10);
     sec = (((angle - deg) * 60) - min) * 60;
     
     // Result in degrees sex (dd.mmss)
@@ -96,8 +96,8 @@ function DECtoSEX(angle) {
 function DEGtoSEC(angle) {
     var deg, min, sec;
     // Extract DMS
-    deg = parseInt(angle);
-    min = parseInt((angle - deg) * 100);
+    deg = parseInt(angle, 10);
+    min = parseInt((angle - deg) * 100, 10);
     sec = (((angle - deg) * 100) - min) * 100;
     
     // Result in degrees sex (dd.mmss)
