@@ -16,7 +16,8 @@ function WGStoCHy(lat, lng) {
     lng_aux = (lng - 26782.5) / 10000;
     
     // Process Y
-    return 600072.37 + 211455.93 * lng_aux - 10938.51 * lng_aux * lat_aux - 0.36 * lng_aux * Math.pow(lat_aux, 2) - 44.54 * Math.pow(lng_aux, 3);
+    return 600072.37 + 211455.93 * lng_aux - 10938.51 * lng_aux * lat_aux - 
+        0.36 * lng_aux * Math.pow(lat_aux, 2) - 44.54 * Math.pow(lng_aux, 3);
 }
 
 // Convert WGS lat/long (° dec) to CH x
@@ -35,7 +36,9 @@ function WGStoCHx(lat, lng) {
     lng_aux = (lng - 26782.5) / 10000;
     
     // Process X
-    return 200147.07 + 308807.95 * lat_aux + 3745.25 * Math.pow(lng_aux, 2) + 76.63 * Math.pow(lat_aux, 2) - 194.56 * Math.pow(lng_aux, 2) * lat_aux + 119.79 * Math.pow(lat_aux, 3);
+    return 200147.07 + 308807.95 * lat_aux + 3745.25 * Math.pow(lng_aux, 2) + 
+        76.63 * Math.pow(lat_aux, 2) - 194.56 * Math.pow(lng_aux, 2) * 
+        lat_aux + 119.79 * Math.pow(lat_aux, 3);
 }
 
 // Convert CH y/x to WGS lat
@@ -47,7 +50,9 @@ function CHtoWGSlat(y, x) {
     x_aux = (x - 200000) / 1000000;
     
     // Process lat
-    lat = 16.9023892 + 3.238272 * x_aux - 0.270978 * Math.pow(y_aux, 2) - 0.002528 * Math.pow(x_aux, 2) - 0.0447 * Math.pow(y_aux, 2) * x_aux - 0.0140 * Math.pow(x_aux, 3);
+    lat = 16.9023892 + 3.238272 * x_aux - 0.270978 * Math.pow(y_aux, 2) - 
+        0.002528 * Math.pow(x_aux, 2) - 0.0447 * Math.pow(y_aux, 2) * x_aux - 
+        0.0140 * Math.pow(x_aux, 3);
     
     // Unit 10000" to 1 " and converts seconds to degrees (dec)
     return lat * 100 / 36;
@@ -62,7 +67,8 @@ function CHtoWGSlng(y, x) {
     x_aux = (x - 200000) / 1000000;
     
     // Process long
-    lng = 2.6779094 + 4.728982 * y_aux + 0.791484 * y_aux * x_aux + 0.1306 * y_aux * Math.pow(x_aux, 2) - 0.0436 * Math.pow(y_aux, 3);
+    lng = 2.6779094 + 4.728982 * y_aux + 0.791484 * y_aux * x_aux + 0.1306 * 
+        y_aux * Math.pow(x_aux, 2) - 0.0436 * Math.pow(y_aux, 3);
     
     // Unit 10000" to 1 " and converts seconds to degrees (dec)
     return lng * 100 / 36;
