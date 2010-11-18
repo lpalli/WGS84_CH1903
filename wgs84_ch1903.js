@@ -1,3 +1,5 @@
+var DECtoSEX, DEGtoSEC;
+
 // Convert WGS lat/long (° dec) to CH y
 function WGStoCHy(lat, lng) {
     // Converts degrees dec to sex
