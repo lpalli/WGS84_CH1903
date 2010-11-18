@@ -1,5 +1,3 @@
-<script language="Javascript">
-
 // Convert WGS lat/long (° dec) to CH y
 function WGStoCHy(lat, lng) {
 
@@ -137,5 +135,3 @@ function DEGtoSEC(angle) {
   return sec + min*60 + deg*3600;
   
 }
-
-</script>
