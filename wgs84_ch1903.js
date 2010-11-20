@@ -1,4 +1,3 @@
-var DECtoSEX, DEGtoSEC;
 // Constructor
 var WGS1984_CH1903 = function () {};
 
@@ -6,15 +5,15 @@ var WGS1984_CH1903 = function () {};
 WGS1984_CH1903.VERSION = "0.0.1";
 
 // Convert WGS lat/long (° dec) to CH y
-function WGStoCHy(lat, lng) {
+WGS1984_CH1903.WGStoCHy = function (lat, lng) {
     var lat_aux, lng_aux;
     // Converts degrees dec to sex
-    lat = DECtoSEX(lat);
-    lng = DECtoSEX(lng);
+    lat = WGS1984_CH1903.DECtoSEX(lat);
+    lng = WGS1984_CH1903.DECtoSEX(lng);
     
     // Converts degrees to seconds (sex)
-    lat = DEGtoSEC(lat);
-    lng = DEGtoSEC(lng);
+    lat = WGS1984_CH1903.DEGtoSEC(lat);
+    lng = WGS1984_CH1903.DEGtoSEC(lng);
     
     // Axiliary values (% Bern)
     lat_aux = (lat - 169028.66) / 10000;
@@ -23,18 +22,18 @@ function WGStoCHy(lat, lng) {
     // Process Y
     return 600072.37 + 211455.93 * lng_aux - 10938.51 * lng_aux * lat_aux - 
         0.36 * lng_aux * Math.pow(lat_aux, 2) - 44.54 * Math.pow(lng_aux, 3);
-}
+};
 
 // Convert WGS lat/long (° dec) to CH x
-function WGStoCHx(lat, lng) {
+WGS1984_CH1903.WGStoCHx = function (lat, lng) {
     var lat_aux, lng_aux;
     // Converts degrees dec to sex
-    lat = DECtoSEX(lat);
-    lng = DECtoSEX(lng);
+    lat = WGS1984_CH1903.DECtoSEX(lat);
+    lng = WGS1984_CH1903.DECtoSEX(lng);
     
     // Converts degrees to seconds (sex)
-    lat = DEGtoSEC(lat);
-    lng = DEGtoSEC(lng);
+    lat = WGS1984_CH1903.DEGtoSEC(lat);
+    lng = WGS1984_CH1903.DEGtoSEC(lng);
     
     // Axiliary values (% Bern)
     lat_aux = (lat - 169028.66) / 10000;
@@ -44,10 +43,10 @@ function WGStoCHx(lat, lng) {
     return 200147.07 + 308807.95 * lat_aux + 3745.25 * Math.pow(lng_aux, 2) + 
         76.63 * Math.pow(lat_aux, 2) - 194.56 * Math.pow(lng_aux, 2) * 
         lat_aux + 119.79 * Math.pow(lat_aux, 3);
-}
+};
 
 // Convert CH y/x to WGS lat
-function CHtoWGSlat(y, x) {
+WGS1984_CH1903.CHtoWGSlat = function (y, x) {
     var y_aux, x_aux, lat;
     // Converts militar to civil and  to unit = 1000km
     // Axiliary values (% Bern)
@@ -61,10 +60,10 @@ function CHtoWGSlat(y, x) {
     
     // Unit 10000" to 1 " and converts seconds to degrees (dec)
     return lat * 100 / 36;
-}
+};
 
 // Convert CH y/x to WGS long
-function CHtoWGSlng(y, x) {
+WGS1984_CH1903.CHtoWGSlng = function (y, x) {
     var y_aux, x_aux, lng;
     // Converts militar to civil and  to unit = 1000km
     // Axiliary values (% Bern)
@@ -77,10 +76,10 @@ function CHtoWGSlng(y, x) {
     
     // Unit 10000" to 1 " and converts seconds to degrees (dec)
     return lng * 100 / 36;
-}
+};
 
 // Convert SEX DMS angle to DEC
-function SEXtoDEC(angle) {
+WGS1984_CH1903.SEXtoDEC = function (angle) {
     var deg, min, sec;
     // Extract DMS
     deg = parseInt(angle, 10);
@@ -89,10 +88,10 @@ function SEXtoDEC(angle) {
     
     // Result in degrees sex (dd.mmss)
     return deg + (sec / 60 + min) / 60;
-}
+};
 
 // Convert DEC angle to SEX DMS
-function DECtoSEX(angle) {
+WGS1984_CH1903.DECtoSEX = function (angle) {
     var deg, min, sec;
     // Extract DMS
     deg = parseInt(angle, 10);
@@ -101,10 +100,10 @@ function DECtoSEX(angle) {
     
     // Result in degrees sex (dd.mmss)
     return deg + min / 100 + sec / 10000;
-}
+};
 
 // Convert Degrees angle to seconds
-function DEGtoSEC(angle) {
+WGS1984_CH1903.DEGtoSEC = function (angle) {
     var deg, min, sec;
     // Extract DMS
     deg = parseInt(angle, 10);
@@ -113,4 +112,4 @@ function DEGtoSEC(angle) {
     
     // Result in degrees sex (dd.mmss)
     return sec + min * 60 + deg * 3600;
-}
+};
