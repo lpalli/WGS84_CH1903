@@ -1,4 +1,6 @@
 var DECtoSEX, DEGtoSEC;
+// Constructor
+var WGS1984_CH1903 = function () {};
 
 // Convert WGS lat/long (° dec) to CH y
 function WGStoCHy(lat, lng) {
