@@ -2,6 +2,9 @@ var DECtoSEX, DEGtoSEC;
 // Constructor
 var WGS1984_CH1903 = function () {};
 
+// Version of this library
+WGS1984_CH1903.VERSION = "0.0.1";
+
 // Convert WGS lat/long (° dec) to CH y
 function WGStoCHy(lat, lng) {
     var lat_aux, lng_aux;
