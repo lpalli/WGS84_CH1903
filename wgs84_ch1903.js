@@ -1,6 +1,6 @@
 var DECtoSEX, DEGtoSEC;
 
-// Convert WGS lat/long (° dec) to CH y
+// Convert WGS lat/long (Â° dec) to CH y
 function WGStoCHy(lat, lng) {
     var lat_aux, lng_aux;
     // Converts degrees dec to sex
@@ -20,7 +20,7 @@ function WGStoCHy(lat, lng) {
         0.36 * lng_aux * Math.pow(lat_aux, 2) - 44.54 * Math.pow(lng_aux, 3);
 }
 
-// Convert WGS lat/long (° dec) to CH x
+// Convert WGS lat/long (Â° dec) to CH x
 function WGStoCHx(lat, lng) {
     var lat_aux, lng_aux;
     // Converts degrees dec to sex
