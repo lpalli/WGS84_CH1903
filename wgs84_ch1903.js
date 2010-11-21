@@ -1,6 +1,6 @@
 // Namespace
 var WGS1984_CH1903 = WGS1984_CH1903 || {
-    // dependencies
+    // Dependencies
 };
 
 // Version of this library
