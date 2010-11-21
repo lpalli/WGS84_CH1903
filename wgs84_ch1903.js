@@ -4,6 +4,28 @@ var WGS1984_CH1903 = WGS1984_CH1903 || {};
 // Version of this library
 WGS1984_CH1903.VERSION = "0.0.1";
 
+// Nondestructive namespacing function, if a namespace exists, it won't be 
+// re-created.
+WGS1984_CH1903.namespace = function (ns_string) {
+    var parts = ns_string.split('.'),
+        parent = WGS1984_CH1903,
+        i;
+    
+    // Strip redoundant leading global
+    if (parts[0] === "WGS1984_CH1903") {
+        parts = parts.slice(1);
+    }
+    
+    for (i = 0; i < parts.length; i += 1) {
+        // Create a property if it doesn't exist
+        if (typeof parent[parts[i]] === "undefined") {
+            parent[parts[i]] = {};
+        }
+        parent = parent[parts[i]];
+    }
+    return parent;
+};
+
 // Convert WGS lat/long (° dec) to CH y
 WGS1984_CH1903.WGStoCHy = function (lat, lng) {
     var lat_aux, lng_aux;
