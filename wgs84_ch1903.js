@@ -28,14 +28,15 @@ WGS1984_CH1903.namespace = function (ns_string) {
 
 // Convert WGS lat/long (° dec) to CH y
 WGS1984_CH1903.WGStoCHy = function (lat, lng) {
-    var lat_aux, lng_aux;
+    var utilities = WGS1984_CH1903.namespace('WGS1984_CH1903.utilities'), 
+        lat_aux, lng_aux;
     // Converts degrees dec to sex
-    lat = WGS1984_CH1903.DECtoSEX(lat);
-    lng = WGS1984_CH1903.DECtoSEX(lng);
+    lat = utilities.DECtoSEX(lat);
+    lng = utilities.DECtoSEX(lng);
     
     // Converts degrees to seconds (sex)
-    lat = WGS1984_CH1903.DEGtoSEC(lat);
-    lng = WGS1984_CH1903.DEGtoSEC(lng);
+    lat = utilities.DEGtoSEC(lat);
+    lng = utilities.DEGtoSEC(lng);
     
     // Axiliary values (% Bern)
     lat_aux = (lat - 169028.66) / 10000;
@@ -48,14 +49,15 @@ WGS1984_CH1903.WGStoCHy = function (lat, lng) {
 
 // Convert WGS lat/long (° dec) to CH x
 WGS1984_CH1903.WGStoCHx = function (lat, lng) {
-    var lat_aux, lng_aux;
+    var utilities = WGS1984_CH1903.namespace('WGS1984_CH1903.utilities'), 
+        lat_aux, lng_aux;
     // Converts degrees dec to sex
-    lat = WGS1984_CH1903.DECtoSEX(lat);
-    lng = WGS1984_CH1903.DECtoSEX(lng);
+    lat = utilities.DECtoSEX(lat);
+    lng = utilities.DECtoSEX(lng);
     
     // Converts degrees to seconds (sex)
-    lat = WGS1984_CH1903.DEGtoSEC(lat);
-    lng = WGS1984_CH1903.DEGtoSEC(lng);
+    lat = utilities.DEGtoSEC(lat);
+    lng = utilities.DEGtoSEC(lng);
     
     // Axiliary values (% Bern)
     lat_aux = (lat - 169028.66) / 10000;
@@ -100,38 +102,56 @@ WGS1984_CH1903.CHtoWGSlng = function (y, x) {
     return lng * 100 / 36;
 };
 
-// Convert SEX DMS angle to DEC
-WGS1984_CH1903.SEXtoDEC = function (angle) {
-    var deg, min, sec;
-    // Extract DMS
-    deg = parseInt(angle, 10);
-    min = parseInt((angle - deg) * 100, 10);
-    sec = (((angle - deg) * 100) - min) * 100;
-    
-    // Result in degrees sex (dd.mmss)
-    return deg + (sec / 60 + min) / 60;
-};
+WGS1984_CH1903.namespace('WGS1984_CH1903.utilities');
 
-// Convert DEC angle to SEX DMS
-WGS1984_CH1903.DECtoSEX = function (angle) {
-    var deg, min, sec;
-    // Extract DMS
-    deg = parseInt(angle, 10);
-    min = parseInt((angle - deg) * 60, 10);
-    sec = (((angle - deg) * 60) - min) * 60;
+WGS1984_CH1903.utilities = (function () {
+        // Dependencies
+    //var 
+        
+        // Private properties
+        
+        // Private methods
+        
+        // end var
     
-    // Result in degrees sex (dd.mmss)
-    return deg + min / 100 + sec / 10000;
-};
-
-// Convert Degrees angle to seconds
-WGS1984_CH1903.DEGtoSEC = function (angle) {
-    var deg, min, sec;
-    // Extract DMS
-    deg = parseInt(angle, 10);
-    min = parseInt((angle - deg) * 100, 10);
-    sec = (((angle - deg) * 100) - min) * 100;
+    // Optionally ont-time init procedures
     
-    // Result in degrees sex (dd.mmss)
-    return sec + min * 60 + deg * 3600;
-};
+    // public API
+    return {
+        // Convert SEX DMS angle to DEC
+        SEXtoDEC: function (angle) {
+            var deg, min, sec;
+            // Extract DMS
+            deg = parseInt(angle, 10);
+            min = parseInt((angle - deg) * 100, 10);
+            sec = (((angle - deg) * 100) - min) * 100;
+            
+            // Result in degrees sex (dd.mmss)
+            return deg + (sec / 60 + min) / 60;
+        },
+        
+        // Convert DEC angle to SEX DMS
+        DECtoSEX: function (angle) {
+            var deg, min, sec;
+            // Extract DMS
+            deg = parseInt(angle, 10);
+            min = parseInt((angle - deg) * 60, 10);
+            sec = (((angle - deg) * 60) - min) * 60;
+            
+            // Result in degrees sex (dd.mmss)
+            return deg + min / 100 + sec / 10000;
+        },
+        
+        // Convert Degrees angle to seconds
+        DEGtoSEC: function (angle) {
+            var deg, min, sec;
+            // Extract DMS
+            deg = parseInt(angle, 10);
+            min = parseInt((angle - deg) * 100, 10);
+            sec = (((angle - deg) * 100) - min) * 100;
+            
+            // Result in degrees sex (dd.mmss)
+            return sec + min * 60 + deg * 3600;
+        }
+    };
+}());
