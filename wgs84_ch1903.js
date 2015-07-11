@@ -1,17 +1,38 @@
-<script language="Javascript">
+// The MIT License (MIT)
+// 
+// Copyright (c) 2014 Federal Office of Topography swisstopo, Wabern, CH
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+// 
+	
+// Source: http://www.swisstopo.admin.ch/internet/swisstopo/en/home/topics/survey/sys/refsys/projections.html (see PDFs under "Documentation")
+// Updated 9 dec 2014
+// Please validate your results with NAVREF on-line service: http://www.swisstopo.admin.ch/internet/swisstopo/en/home/apps/calc/navref.html (difference ~ 1-2m)
 
 // Convert WGS lat/long (° dec) to CH y
 function WGStoCHy(lat, lng) {
 
-  // Converts degrees dec to sex
+  // Convert decimal degrees to sexagesimal seconds
   lat = DECtoSEX(lat);
   lng = DECtoSEX(lng);
 
-  // Converts degrees to seconds (sex)
-  lat = DEGtoSEC(lat);
-  lng = DEGtoSEC(lng);
-  
-  // Axiliary values (% Bern)
+  // Auxiliary values (% Bern)
   var lat_aux = (lat - 169028.66)/10000;
   var lng_aux = (lng - 26782.5)/10000;
   
@@ -28,15 +49,11 @@ function WGStoCHy(lat, lng) {
 // Convert WGS lat/long (° dec) to CH x
 function WGStoCHx(lat, lng) {
   
-  // Converts degrees dec to sex
+  // Convert decimal degrees to sexagesimal seconds
   lat = DECtoSEX(lat);
   lng = DECtoSEX(lng);
   
-  // Converts degrees to seconds (sex)
-  lat = DEGtoSEC(lat);
-  lng = DEGtoSEC(lng);
-  
-  // Axiliary values (% Bern)
+  // Auxiliary values (% Bern)
   var lat_aux = (lat - 169028.66)/10000;
   var lng_aux = (lng - 26782.5)/10000;
 
@@ -52,12 +69,11 @@ function WGStoCHx(lat, lng) {
   
 }
 
-
 // Convert CH y/x to WGS lat
 function CHtoWGSlat(y, x) {
 
-  // Converts militar to civil and  to unit = 1000km
-  // Axiliary values (% Bern)
+  // Converts military to civil and  to unit = 1000km
+  // Auxiliary values (% Bern)
   var y_aux = (y - 600000)/1000000;
   var x_aux = (x - 200000)/1000000;
   
@@ -79,8 +95,8 @@ function CHtoWGSlat(y, x) {
 // Convert CH y/x to WGS long
 function CHtoWGSlng(y, x) {
 
-  // Converts militar to civil and  to unit = 1000km
-  // Axiliary values (% Bern)
+  // Converts military to civil and  to unit = 1000km
+  // Auxiliary values (% Bern)
   var y_aux = (y - 600000)/1000000;
   var x_aux = (x - 200000)/1000000;
   
@@ -98,44 +114,15 @@ function CHtoWGSlng(y, x) {
   
 }
 
-
-// Convert SEX DMS angle to DEC
-function SEXtoDEC(angle) {
-
-  // Extract DMS
-  var deg = parseInt( angle );
-  var min = parseInt( (angle-deg)*100 );
-  var sec = (((angle-deg)*100) - min) * 100;
-  
-  // Result in degrees sex (dd.mmss)
-  return deg + (sec/60 + min)/60;
-  
-}
-
-// Convert DEC angle to SEX DMS
+// Convert angle in decimal degrees to sexagesimal seconds
 function DECtoSEX(angle) {
 
   // Extract DMS
-  var deg = parseInt( angle );
-  var min = parseInt( (angle-deg)*60 );
-  var sec =  (((angle-deg)*60)-min)*60;   
+  var deg = parseInt(angle);
+  var min = parseInt((angle-deg)*60);
+  var sec = (((angle-deg)*60)-min)*60;   
 
-  // Result in degrees sex (dd.mmss)
-  return deg + min/100 + sec/10000;
+  // Result sexagesimal seconds
+  return sec + min*60.0 + deg*3600.0;
   
 }
-
-// Convert Degrees angle to seconds
-function DEGtoSEC(angle) {
-
-  // Extract DMS
-  var deg = parseInt( angle );
-  var min = parseInt( (angle-deg)*100 );
-  var sec = (((angle-deg)*100) - min) * 100;
-  
-  // Result in degrees sex (dd.mmss)
-  return sec + min*60 + deg*3600;
-  
-}
-
-</script>
